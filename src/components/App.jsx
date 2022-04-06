@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Form from "./form/Form";
+import Filter from "./filter/Filter";
 import ContactList from "./contactList/ContactList";
+
+//? Library
 import { nanoid } from 'nanoid';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 
 
@@ -13,50 +17,47 @@ class App extends Component {
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    name: '',
-    number: ''
+    filter: ''
   };
 
-  // todo Function
-  inputHandler = (e) => {
-    console.log(this.state.contacts)
-    const { name, value } = e.currentTarget
-    this.setState({ [name]: value })
+
+  //todo Function
+  formSubmitHandler = (stateData) => {
+    const nameArr = this.state.contacts.map(elem => elem.name)
+    if (nameArr.includes(stateData.name)) {
+      return Report.failure(
+        "Failure",
+        `${stateData.name} is already in contacts!`,
+        "Try again"
+      );
+    };
+
+    this.setState(prevState => ({
+      contacts:
+        [{ id: nanoid(), name: stateData.name, number: stateData.number }, ...prevState.contacts]
+    }));
   };
 
-  reset = () => {this.setState({name: "", number: ""}) };
+  filterHandler = (e) => { this.setState({ filter: e.currentTarget.value }) };
 
 
-  submitHandler = (e) => {
-    e.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      name: this.state.name,
-      number: this.state.number
-    }
-
-    this.setState(prevState => ({ contacts: [newContact, ...prevState.contacts] })
-    );
-
-    this.reset();
-  };
-// todo
-
-
+  //todo Render()
   render() {
-    const { contacts, name, number } = this.state;
+    const { contacts, filter } = this.state;
+
+    const filtered = contacts.filter(elem => elem.name.toLowerCase().includes(filter.toLowerCase()));
 
     return (
-      <>
-        <Form name={name} phone={number} input={this.inputHandler} submit={this.submitHandler} />
-        <ContactList contacts={contacts} />
-      </>
+      <div>
+        <h1>Phonebook</h1>
+        <Form submit={this.formSubmitHandler}/>
+
+        <h2>Contacts</h2>
+        <Filter filter={filter} change={this.filterHandler}/>
+        <ContactList contacts={filtered}/>
+      </div>
     )
   };
 };
-
-
-//<ContactList contacts={contacts} />
 
 export default App;
