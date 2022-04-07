@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./Form.module.css"; 
 
 class Form extends Component {
     state = {
@@ -28,10 +29,11 @@ class Form extends Component {
     const { name, number } = this.state;
 
     return (
-        <div>
+        <div className={styles.container}>
             <form onSubmit={this.submitHandler}>
-            <label>Name
-                <input
+            <label className={styles.form__title}>Name
+                    <input
+    className={styles.input__form}
     type="text"
     name="name"
     value={name}
@@ -41,8 +43,9 @@ class Form extends Component {
     required
 />
             </label>
-            <label>Number
+            <label className={styles.form__title}>Number
                     <input
+    className={styles.input__form}
     type="tel"
     name="number"
     value={number}
@@ -52,7 +55,7 @@ class Form extends Component {
     required
 />
             </label>
-        <button type="sumbmit">Add contact</button>
+        <button className={styles.form__button} type="sumbmit">Add contact</button>
         </form>
         </div>
         );
