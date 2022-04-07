@@ -7,7 +7,7 @@ const Filter = ({ filter, change }) => {
                 <input type="text" name="filter" value={filter} onChange={change}></input>
             </label>
         </>
-    )
+    );
 };
 
 export default Filter;

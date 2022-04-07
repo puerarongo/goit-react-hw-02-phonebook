@@ -8,7 +8,6 @@ import { nanoid } from 'nanoid';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 
-
 class App extends Component {
   state = {
     contacts: [
@@ -22,6 +21,7 @@ class App extends Component {
 
 
   //todo Function
+// !
   formSubmitHandler = (stateData) => {
     const nameArr = this.state.contacts.map(elem => elem.name)
     if (nameArr.includes(stateData.name)) {
@@ -35,10 +35,18 @@ class App extends Component {
     this.setState(prevState => ({
       contacts:
         [{ id: nanoid(), name: stateData.name, number: stateData.number }, ...prevState.contacts]
-    }));
+    }) );
   };
 
+// !
   filterHandler = (e) => { this.setState({ filter: e.currentTarget.value }) };
+
+// !
+  deleteComponent = (id) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter((elem) => elem.id !== id)
+    }) );
+  };
 
 
   //todo Render()
@@ -54,7 +62,7 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter filter={filter} change={this.filterHandler}/>
-        <ContactList contacts={filtered}/>
+        <ContactList contacts={filtered} deleteById={this.deleteComponent}/>
       </div>
     )
   };

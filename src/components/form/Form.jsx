@@ -20,7 +20,6 @@ class Form extends Component {
     e.preventDefault();
 
     this.props.submit(this.state);
-
     this.reset();
   };
 
@@ -30,7 +29,6 @@ class Form extends Component {
 
     return (
         <div>
-            <h2>Phonebook</h2>
             <form onSubmit={this.submitHandler}>
             <label>Name
                 <input
@@ -54,7 +52,6 @@ class Form extends Component {
     required
 />
             </label>
-
         <button type="sumbmit">Add contact</button>
         </form>
         </div>
