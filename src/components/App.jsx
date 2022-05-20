@@ -23,8 +23,8 @@ class App extends Component {
   //todo Function
 // !
   formSubmitHandler = (stateData) => {
-    const nameArr = this.state.contacts.map(elem => elem.name)
-    if (nameArr.includes(stateData.name)) {
+    const nameArr = this.state.contacts.map(elem => elem.name.toLowerCase())
+    if (nameArr.includes(stateData.name.toLowerCase())) {
       return Report.failure(
         "Failure",
         `${stateData.name} is already in contacts!`,

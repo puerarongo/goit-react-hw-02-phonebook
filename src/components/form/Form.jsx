@@ -10,8 +10,8 @@ class Form extends Component {
 
     //todo Function
     inputHandler = (e) => {
-    const { name, value } = e.currentTarget
-    this.setState({ [name]: value })
+        const { name, value } = e.currentTarget
+        this.setState({ [name]: value })
     };
 
     submitHandler = (e) => {
