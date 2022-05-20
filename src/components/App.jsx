@@ -57,13 +57,13 @@ class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <Form submit={this.formSubmitHandler}/>
+        <Form submit={this.formSubmitHandler} />
 
         <h2>Contacts</h2>
-        <Filter filter={filter} change={this.filterHandler}/>
-        <ContactList contacts={filtered} deleteById={this.deleteComponent}/>
+        <Filter filter={filter} change={this.filterHandler} />
+        <ContactList contacts={filtered} deleteById={this.deleteComponent} />
       </div>
-    )
+    );
   };
 };
 
